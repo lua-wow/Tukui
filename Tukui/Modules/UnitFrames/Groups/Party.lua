@@ -82,7 +82,7 @@ function UnitFrames:Party()
 		Buffs.spacing = 2
 		Buffs.initialAnchor = "TOPLEFT"
 		Buffs.PostCreateIcon = UnitFrames.PostCreateAura
-		Buffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+		Buffs.PostUpdateIcon = UnitFrames.PostUpdateIcon
 		Buffs.PostCreateButton = UnitFrames.PostCreateAura
 		Buffs.PostUpdateButton = UnitFrames.PostUpdateAura
 		
@@ -99,7 +99,7 @@ function UnitFrames:Party()
 		Debuffs.spacing = 2
 		Debuffs.initialAnchor = "TOPLEFT"
 		Debuffs.PostCreateIcon = UnitFrames.PostCreateAura
-		Debuffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+		Debuffs.PostUpdateIcon = UnitFrames.PostUpdateIcon 
 		Debuffs.PostCreateButton = UnitFrames.PostCreateAura
 		Debuffs.PostUpdateButton = UnitFrames.PostUpdateAura
 		

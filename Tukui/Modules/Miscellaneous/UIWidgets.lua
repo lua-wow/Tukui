@@ -8,6 +8,7 @@ function UIWidgets:SkinUIWidgetStatusBar(widgetInfo, widgetContainer)
 	local Torghast = IsInJailersTower and IsInJailersTower() or false
 
 	if Bar and not Bar.IsSkinned then
+		print("UIWidgets:SkinUIWidgetStatusBar", Bar:IsObjectType('Frame'))
 		if Bar.BGLeft then Bar.BGLeft:SetAlpha(0) end
 		if Bar.BGRight then Bar.BGRight:SetAlpha(0) end
 		if Bar.BGCenter then Bar.BGCenter:SetAlpha(0) end

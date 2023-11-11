@@ -87,4 +87,10 @@ oUF.colors.mirror = {
 	FEIGNDEATH = { 1.0, 0.70, 0.0 }
 }
 
+if (not T.Retail) then
+	for debuffType, color in next, DebuffTypeColor do
+		oUF.colors.debuff[debuffType] = { r = color.r, g = color.g, b = color.b }
+	end
+end
+
 T["Colors"] = oUF.colors
