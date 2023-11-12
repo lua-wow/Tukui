@@ -85,9 +85,9 @@ oUF.colors.mirror = {
 	FEIGNDEATH = oUF:CreateColor(1.0, 0.70, 0.0)
 }
 
-if (not T.Retail) then
+if (next(UF.colors.debuff) == nil) then
 	for debuffType, color in next, DebuffTypeColor do
-		oUF.colors.debuff[debuffType] = { r = color.r, g = color.g, b = color.b }
+		oUF.colors.debuff[debuffType] = oUF:CreateColor(color.r, color.g, color.b)
 	end
 end
 
