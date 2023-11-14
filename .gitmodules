@@ -2,3 +2,7 @@
 	path = Tukui/Libs/oUF_Retail
 	url = git@github.com:pedrozc90/oUF.git
 	branch = retail
+[submodule "Tukui/Libs/oUF"]
+	path = Tukui/Libs/oUF
+	url = git@github.com:pedrozc90/oUF.git
+	branch = classic
