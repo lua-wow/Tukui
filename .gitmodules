@@ -1,0 +1,4 @@
+[submodule "Tukui/Libs/oUF_Retail"]
+	path = Tukui/Libs/oUF_Retail
+	url = git@github.com:pedrozc90/oUF.git
+	branch = retail
