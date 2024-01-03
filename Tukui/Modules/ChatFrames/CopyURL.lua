@@ -50,6 +50,13 @@ function Link:SetHyperlink(data, ...)
 		ChatFrameEditBox:Insert(CurrentLink)
 		ChatFrameEditBox:HighlightText()
 		CurrentLink = nil
+	elseif (data:find("^questie")) then
+		local questIdStr, unitGUID = data:match("^questie:(%d+):([%a%d%-]+)")
+		local questId = tonumber(questIdStr)
+		local questLogIndex = GetQuestLogIndexByID(questId)
+		if (questLogIndex > 0) then
+    		SelectQuestLogEntry(questLogIndex)
+		end
 	else
 		SetHyperlink(self, data, ...)
 	end
