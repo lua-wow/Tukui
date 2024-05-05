@@ -374,7 +374,8 @@ function Bags:CreateContainer(storagetype, ...)
 	Container:SetScale(1)
 	Container:SetWidth(((ButtonSize + ButtonSpacing) * ItemsPerRow) + 22 - ButtonSpacing)
 	Container:SetPoint(...)
-	Container:SetFrameStrata("MEDIUM")
+	-- Container:SetFrameStrata("MEDIUM")
+	Container:SetFrameStrata("LOW")
 	Container:SetFrameLevel(20)
 	Container:Hide()
 	Container:CreateBackdrop()
@@ -768,7 +769,9 @@ function Bags:SlotUpdate(id, button)
 		end
 
 		button.Quest:Show()
-		button.Backdrop:SetBorderColor(1, 1, 0)
+		if (button.Backdrop) then
+			button.Backdrop:SetBorderColor(1, 1, 0)
+		end
 	else
 		if Rarity then
 			local R, G, B = GetItemQualityColor(Rarity)
