@@ -82,7 +82,7 @@ function UnitFrames:Nameplates()
 	Buffs["growth-x"] = "RIGHT"
 	Buffs.isNameplate = true
 	Buffs.PostCreateIcon = UnitFrames.PostCreateAura
-	Buffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+	Buffs.PostUpdateIcon = UnitFrames.PostUpdateIcon
 	Buffs.PostCreateButton = UnitFrames.PostCreateAura
 	Buffs.PostUpdateButton = UnitFrames.PostUpdateAura
 	Buffs.CustomFilter = UnitFrames.BuffIsStealable
@@ -101,7 +101,7 @@ function UnitFrames:Nameplates()
 	Debuffs["growth-x"] = "RIGHT"
 	Debuffs.isNameplate = true
 	Debuffs.PostCreateIcon = UnitFrames.PostCreateAura
-	Debuffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+	Debuffs.PostUpdateIcon = UnitFrames.PostUpdateIcon
 	Debuffs.PostCreateButton = UnitFrames.PostCreateAura
 	Debuffs.PostUpdateButton = UnitFrames.PostUpdateAura
 	Debuffs.onlyShowPlayer = C.NamePlates.OnlySelfDebuffs

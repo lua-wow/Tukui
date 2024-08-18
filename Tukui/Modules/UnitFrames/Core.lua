@@ -440,80 +440,75 @@ function UnitFrames:PostCreateAura(button, unit)
 	end
 end
 
-function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff, duration, timeLeft)
-	local data
+function UnitFrames:PostUpdateIcon(unit, button, index, position, duration, expiration, debuffType, isStealable)
+	local data = {
+		index = index,
+		duration = duration,
+		expirationTime = expiration,
+		dispelName = debuffType,
+		isStealable = isStealable,
+		isPlayerAura = button.isPlayer,
+		isHarmful = (button.filter == "HARMFUL"),
+		isHelpful = (button.filter == "HELPFUL")
+	}
+	UnitFrames:PostUpdateAura(button, unit, data, position)
+end
+
+function UnitFrames:PostUpdateAura(button, unit, data, position)
+	local duration = data.duration
+	local expirationTime = data.expirationTime
+
+	local Icon = button.Icon or button.icon
+	local Cooldown = button.Cooldown or button.cd
 	
-	-- Because on oUF Retail args are different, adjust them
-	if T.Retail then
-		local arg1, arg2, arg3, arg4 = unit, button, index, offset
-		
-		button = arg1
-		unit = arg2
-		data = arg3
-		index = arg4
-		
-		button.filter = (data.isHelpful and "HELPFUL") or (data.isHarmful and "HARMFUL")
-		button.icon = button.Icon
-		button.isPlayer = data.isPlayerAura
-	end
-	
-	local Name, Texture, Count, DType, Duration, ExpirationTime, UnitCaster, IsStealable,
-		NameplateShowSelf, SpellID, CanApply, IsBossDebuff, CasterIsPlayer, NameplateShowAll,
-		TimeMod, Effect1, Effect2, Effect3 = UnitAura(unit, index, button.filter)
-	
-	if button then
-		if(button.filter == "HARMFUL") then
-			if C.UnitFrames.DesaturateDebuffs and (not UnitIsFriend("player", unit) and not button.isPlayer) then
-				button.icon:SetDesaturated(true)
+	if (button) then
+		if (data.isHarmful) then
+			if C.UnitFrames.DesaturateDebuffs and (not UnitIsFriend("player", unit) and not data.isPlayerAura) then
+				Icon:SetDesaturated(true)
 				button.Backdrop:SetBorderColor(unpack(C["General"].BorderColor))
 			else
-				local color = DebuffTypeColor[DType] or DebuffTypeColor.none
-				button.icon:SetDesaturated(false)
+				local color = T.Colors.debuff[data.dispelName] or T.Colors.debuff.none
+				Icon:SetDesaturated(false)
 				button.Backdrop:SetBorderColor(color.r * 0.8, color.g * 0.8, color.b * 0.8)
 			end
 		else
-			if button.Animation then
-				if (IsStealable or DType == "Magic") and UnitIsEnemy("player", unit) then
+			if (button.Animation) then
+				if (data.isStealable or data.dispelName == "Magic") and UnitIsEnemy("player", unit) then
 					if not button.Animation:IsPlaying() then
 						button.Animation:Play()
-
 						button.Backdrop:SetBorderColor(0.2, 0.6, 1)
 					end
 				else
 					if button.Animation:IsPlaying() then
 						button.Animation:Stop()
-
 						button.Backdrop:SetBorderColor(unpack(C["General"].BorderColor))
 					end
 				end
 			end
 		end
 
-		if button.Remaining then
-			local Size = button:GetSize()
-
-			if (Duration and Duration > 0 and Size > 20) then
+		if (button.Remaining) then
+			local size = button:GetSize()
+			if (duration and duration > 0 and size > 20) then
 				button.Remaining:Show()
-
 				button:SetScript("OnUpdate", UnitFrames.SetAuraTimer)
 			else
 				button.Remaining:Hide()
-
 				button:SetScript("OnUpdate", nil)
 			end
 		end
 
-		if (button.cd) then
-			if (Duration and Duration > 0) then
-				button.cd:SetCooldown(ExpirationTime - Duration, Duration)
-				button.cd:Show()
+		if (Cooldown) then
+			if (duration and duration > 0) then
+				Cooldown:SetCooldown(expirationTime - duration, duration)
+				Cooldown:Show()
 			else
-				button.cd:Hide()
+				Cooldown:Hide()
 			end
 		end
 
-		button.Duration = Duration
-		button.TimeLeft = ExpirationTime
+		button.Duration = duration
+		button.TimeLeft = expirationTime
 		button.Elapsed = GetTime()
 	end
 end

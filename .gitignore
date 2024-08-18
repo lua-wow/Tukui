@@ -1,7 +1,11 @@
+# IDE's
+.vscode
+.idea
+*.iml
+
+#Windows
 Thumbs.db
 Desktop.ini
-.DS_Store
-.vscode
 
 # Libraries
 Tukui/Libs/*

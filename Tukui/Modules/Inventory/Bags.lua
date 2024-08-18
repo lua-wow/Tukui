@@ -744,7 +744,9 @@ function Bags:SlotUpdate(id, button)
 		end
 
 		button.Quest:Show()
-		button.Backdrop:SetBorderColor(1, 1, 0)
+		if (button.Backdrop) then
+			button.Backdrop:SetBorderColor(1, 1, 0)
+		end
 	else
 		if Rarity then
 			local R, G, B = GetItemQualityColor(Rarity)
@@ -842,11 +844,8 @@ function Bags:CooldownOnUpdate(elapsed)
 	if self.Elapsed < 0 then
 		if Cooldown <= 0 then
 			self.Text:SetText("")
-
 			self:SetScript("OnUpdate", nil)
 		else
-			self.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE")
-			self.Text:SetTextColor(1, 0, 0)
 			self.Text:SetText(T.FormatTime(Cooldown))
 		end
 
@@ -860,6 +859,8 @@ function Bags:UpdateCooldown(button)
 
 	if not Cooldown.Text then
 		Cooldown.Text = Cooldown:CreateFontString(nil, "OVERLAY")
+		Cooldown.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE")
+		Cooldown.Text:SetTextColor(1, 0, 0)
 		Cooldown.Text:SetPoint("CENTER", 1, 0)
 	end
 

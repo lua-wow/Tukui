@@ -75,7 +75,7 @@ function UnitFrames:TargetOfTarget()
 		Buffs.spacing = 4
 		Buffs.initialAnchor = "TOPLEFT"
 		Buffs.PostCreateIcon = UnitFrames.PostCreateAura
-		Buffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+		Buffs.PostUpdateIcon = UnitFrames.PostUpdateIcon
 		Buffs.PostCreateButton = UnitFrames.PostCreateAura
 		Buffs.PostUpdateButton = UnitFrames.PostUpdateAura
 		Buffs.onlyShowPlayer = C.UnitFrames.OnlySelfBuffs
@@ -84,7 +84,7 @@ function UnitFrames:TargetOfTarget()
 		Debuffs.initialAnchor = "TOPRIGHT"
 		Debuffs["growth-x"] = "LEFT"
 		Debuffs.PostCreateIcon = UnitFrames.PostCreateAura
-		Debuffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+		Debuffs.PostUpdateIcon = UnitFrames.PostUpdateIcon
 		Debuffs.PostCreateButton = UnitFrames.PostCreateAura
 		Debuffs.PostUpdateButton = UnitFrames.PostUpdateAura
 		Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs

@@ -144,7 +144,7 @@ else
 		[25222]   = {0.33, 0.73, 0.75}, -- Renew (Rank 12)
 		[48067]   = {0.33, 0.73, 0.75}, -- Renew (Rank 13)
 		[48068]   = {0.33, 0.73, 0.75}, -- Renew (Rank 14)
-		
+
 		-- HUNTER
 		[19506]   = {0.89, 0.09, 0.05}, -- Trueshot Aura (Rank 1)
 		[20905]   = {0.89, 0.09, 0.05}, -- Trueshot Aura (Rank 2)
@@ -358,6 +358,31 @@ else
 		[2048]    = {0.2, 0.2, 1}, -- Battle Shout (Rank 8)
 		[469]     = {0.4, 0.2, 0.8}, -- Commanding Shout
 	}
+
+	--------------------------------------------------
+	-- Season of Discovery (Phase 1 - Max Level 25)
+	--------------------------------------------------
+	if (oUF.isClassic) then
+		-- Druid
+		Tracker[408124] = { 0.4, 0.8, 0.2 }	-- Lifebloom
+		Tracker[414680] = { 0.2, 0.8, 0.8 }	-- Living Seed
+		Tracker[408120] = { 0.8, 0.4, 0 }	-- Wild Growth
+
+		-- Mage
+		Tracker[400735] = { 0.2, 0.7, 0.2 }	-- Temporal Beacon
+		Tracker[401417] = { 0.2, 0.7, 0.2 }	-- Regeneration
+		Tracker[412510] = { 0.2, 0.7, 0.2 }	-- Mass Regeneration
+		
+		-- Paladin
+		Tracker[407613] = { 0.7, 0.3, 0.7 }	-- Beacon of Light
+
+		-- Priest
+		Tracker[401877] = { 0.2, 0.7, 0.2 }	-- Prayer of Mending
+		
+		-- Shaman
+		Tracker[408514] = { 0.2, 0.2, 1 }	-- Earth Shield
+		Tracker[415236] = { 0.7, 0.3, 0.7 }	-- Healing Rain
+	end
 end
 
 local OnUpdate = function(self)

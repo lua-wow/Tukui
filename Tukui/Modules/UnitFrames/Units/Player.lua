@@ -141,7 +141,7 @@ function UnitFrames:Player()
 			Buffs.spacing = 4
 			Buffs.initialAnchor = "TOPLEFT"
 			Buffs.PostCreateIcon = UnitFrames.PostCreateAura
-			Buffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+			Buffs.PostUpdateIcon = UnitFrames.PostUpdateIcon
 			Buffs.PostCreateButton = UnitFrames.PostCreateAura
 			Buffs.PostUpdateButton = UnitFrames.PostUpdateAura
 			Buffs.PostUpdate = C.UnitFrames.PlayerDebuffs and UnitFrames.UpdateDebuffsHeaderPosition
@@ -177,7 +177,7 @@ function UnitFrames:Player()
 			Debuffs["growth-y"] = "UP"
 			Debuffs["growth-x"] = "LEFT"
 			Debuffs.PostCreateIcon = UnitFrames.PostCreateAura
-			Debuffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+			Debuffs.PostUpdateIcon = UnitFrames.PostUpdateIcon
 			Debuffs.PostCreateButton = UnitFrames.PostCreateAura
 			Debuffs.PostUpdateButton = UnitFrames.PostUpdateAura
 

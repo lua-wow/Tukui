@@ -1,0 +1,8 @@
+[submodule "Tukui/Libs/oUF_Retail"]
+	path = Tukui/Libs/oUF_Retail
+	url = https://github.com/lua-wow/oUF.git
+	branch = retail
+[submodule "Tukui/Libs/oUF"]
+	path = Tukui/Libs/oUF
+	url = https://github.com/lua-wow/oUF.git
+	branch = classic

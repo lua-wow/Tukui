@@ -1,4 +1,4 @@
-## Interface: 11404
+## Interface: 11500
 ## Author: Tukz
 ## X-Maintainer: Tukz
 ## Version: @project-version@
@@ -25,6 +25,8 @@ Libs\LibDeflate\LibDeflate.lua
 Libs\LibSerialize\LibSerialize.lua
 Libs\LibHealComm-4.0\ChatThrottleLib.lua
 Libs\LibHealComm-4.0\LibHealComm-4.0.lua
+Libs\LibClassicDurations\LibClassicDurations.xml
+Libs\LibClassicCasterino\LibClassicCasterino.lua
 Libs\oUF\init.lua
 Libs\oUF\private.lua
 Libs\oUF\ouf.lua

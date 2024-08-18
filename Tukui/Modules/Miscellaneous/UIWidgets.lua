@@ -5,6 +5,8 @@ local UIWidgets = CreateFrame("Frame")
 
 function UIWidgets:SkinUIWidgetStatusBar(widgetInfo, widgetContainer)
 	local Bar = self.Bar
+	if (Bar:IsForbidden()) then return end
+
 	local Torghast = IsInJailersTower and IsInJailersTower() or false
 
 	if Bar and not Bar.IsSkinned then

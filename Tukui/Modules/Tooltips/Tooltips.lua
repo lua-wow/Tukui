@@ -153,6 +153,10 @@ function Tooltip:OnTooltipSetUnit()
 		end
 	end
 
+	if (T.Classic and UnitIsPlayer(Unit) and Guild) then
+		GameTooltip:AddLine("|cff00ff00"..Guild.."|r")
+	end
+
 	if (UnitExists(Unit .. "target")) then
 		local UnitTarget = Unit.."target"
 		local Class = select(2, UnitClass(UnitTarget))
