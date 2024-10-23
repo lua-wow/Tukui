@@ -3,7 +3,7 @@ local T, C, L = unpack((select(2, ...)))
 local UnitFrames = T["UnitFrames"]
 local Widgets = UnitFrames.Widgets
 
-local function addDefaultWidgets(self)
+local function addDefaultWidgets(self, unitFrame)
 	self:add("Health", Widgets.HealthBar, { height = C.Raid.HeightSize - 1 - 3 - 1 - 18,  -- border, power, border, namepanel
 			texture = C.Raid.UFRaidHealthTexture, font = C.Raid.HealthFont,	tag = C.Raid.HealthTag.Value,
 			orientation = C.Raid.VerticalHealth and "VERTICAL" or "HORIZONTAL", })
@@ -15,7 +15,7 @@ local function addDefaultWidgets(self)
 	end
 
 	self:add("RaidTargetIndicator", Widgets.RaidTargetIndicator)
-	self:add("ReadyCheckIndicator", Widgets.ReadyCheckIndicator)
+	self:add("ReadyCheckIndicator", Widgets.ReadyCheckIndicator, { parent = unitFrame.Power, size = 12, })
 	self:add("ResurrectIndicator", Widgets.ResurrectIndicator)
 	self:add("Range", Widgets.RangeIndicator, { outsideAlpha = C.Raid.RangeAlpha, })
 	self:add("Highlight", Widgets.HighlightIndicator, { size = C.Raid.HighlightSize, color = C.Raid.HighlightColor, })
