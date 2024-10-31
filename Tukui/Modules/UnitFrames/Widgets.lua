@@ -284,8 +284,6 @@ end
 do
 	local defaults = function(unitFrame)
 		return {
-			width = unitFrame:GetWidth(),
-			height = unitFrame:GetHeight(),
 			texture = C.Textures.UFHealthTexture,
 		}
 	end
@@ -293,47 +291,36 @@ do
 	Widgets.HealComm = function(unitFrame, config)
 		setmetatable(config, { __index = defaults(unitFrame) })
 		local Health = unitFrame.Health
+		local HealthTexture = T.GetTexture(config.texture)
+		local Vertical = Health:GetOrientation() == "VERTICAL" and true or false
+
 		local myBar = CreateFrame("StatusBar", nil, Health)
 		local otherBar = CreateFrame("StatusBar", nil, Health)
 		local absorbBar = CreateFrame("StatusBar", nil, Health)
-		local Vertical = Health:GetOrientation() == "VERTICAL" and true or false
-		local HealthTexture = T.GetTexture(config.texture)
 
 		myBar:SetOrientation(Vertical and "VERTICAL" or "HORIZONTAL")
 		myBar:SetFrameLevel(Health:GetFrameLevel())
 		myBar:SetStatusBarTexture(HealthTexture)
-		myBar:SetWidth(config.width)
-		myBar:SetHeight(config.height)
 		myBar:SetPoint(Vertical and "LEFT" or "TOP")
 		myBar:SetPoint(Vertical and "RIGHT" or "BOTTOM")
 		myBar:SetPoint(Vertical and "BOTTOM" or "LEFT", Health:GetStatusBarTexture(), Vertical and "TOP" or "RIGHT")
 		myBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommSelfColor))
-		myBar:SetMinMaxValues(0, 1)
-		myBar:SetValue(0)
 
 		otherBar:SetOrientation(Vertical and "VERTICAL" or "HORIZONTAL")
 		otherBar:SetFrameLevel(Health:GetFrameLevel())
-		otherBar:SetWidth(config.width)
-		otherBar:SetHeight(config.height)
+		otherBar:SetStatusBarTexture(HealthTexture)
 		otherBar:SetPoint(Vertical and "LEFT" or "TOP")
 		otherBar:SetPoint(Vertical and "RIGHT" or "BOTTOM")
 		otherBar:SetPoint(Vertical and "BOTTOM" or "LEFT", myBar:GetStatusBarTexture(), Vertical and "TOP" or "RIGHT")
-		otherBar:SetStatusBarTexture(HealthTexture)
 		otherBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommOtherColor))
-		otherBar:SetMinMaxValues(0, 1)
-		otherBar:SetValue(0)
 
 		absorbBar:SetOrientation(Vertical and "VERTICAL" or "HORIZONTAL")
 		absorbBar:SetFrameLevel(Health:GetFrameLevel())
-		absorbBar:SetWidth(config.width)
-		absorbBar:SetHeight(config.height)
+		absorbBar:SetStatusBarTexture(HealthTexture)
 		absorbBar:SetPoint(Vertical and "LEFT" or "TOP")
 		absorbBar:SetPoint(Vertical and "RIGHT" or "BOTTOM")
 		absorbBar:SetPoint(Vertical and "BOTTOM" or "LEFT", otherBar:GetStatusBarTexture(), Vertical and "TOP" or "RIGHT")
-		absorbBar:SetStatusBarTexture(HealthTexture)
 		absorbBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommAbsorbColor))
-		absorbBar:SetMinMaxValues(0, 1)
-		absorbBar:SetValue(0)
 
 		local HealthPrediction = {
 			myBar = myBar,
@@ -344,7 +331,7 @@ do
 
 		-- Enable smoothing bars animation?
 		if C.UnitFrames.Smoothing then
-				HealthPrediction.smoothing = true
+			HealthPrediction.smoothing = true
 		end
 
 		unitFrame.HealthPrediction = HealthPrediction
