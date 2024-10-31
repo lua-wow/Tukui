@@ -297,6 +297,7 @@ do
 		local myBar = CreateFrame("StatusBar", nil, Health)
 		local otherBar = CreateFrame("StatusBar", nil, Health)
 		local absorbBar = CreateFrame("StatusBar", nil, Health)
+		local healAbsorbBar = CreateFrame("StatusBar", nil, Health)
 
 		myBar:SetOrientation(Vertical and "VERTICAL" or "HORIZONTAL")
 		myBar:SetFrameLevel(Health:GetFrameLevel())
@@ -322,10 +323,20 @@ do
 		absorbBar:SetPoint(Vertical and "BOTTOM" or "LEFT", otherBar:GetStatusBarTexture(), Vertical and "TOP" or "RIGHT")
 		absorbBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommAbsorbColor))
 
+		healAbsorbBar:SetOrientation(Vertical and "VERTICAL" or "HORIZONTAL")
+		healAbsorbBar:SetFrameLevel(Health:GetFrameLevel()+1)
+		healAbsorbBar:SetStatusBarTexture(HealthTexture)
+		healAbsorbBar:SetPoint(Vertical and "LEFT" or "TOP")
+		healAbsorbBar:SetPoint(Vertical and "RIGHT" or "BOTTOM")
+		healAbsorbBar:SetPoint(Vertical and "TOP" or "RIGHT", otherBar:GetStatusBarTexture())
+		healAbsorbBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommHealAbsorbColor))
+		healAbsorbBar:SetReverseFill(true)
+
 		local HealthPrediction = {
 			myBar = myBar,
 			otherBar = otherBar,
 			absorbBar = absorbBar,
+			healAbsorbBar = healAbsorbBar,
 			maxOverflow = 1,
 		}
 
