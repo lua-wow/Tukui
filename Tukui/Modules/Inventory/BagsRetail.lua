@@ -201,13 +201,12 @@ function Bags:Enable()
 	end
 
 	SetCVar("combinedBags", 1)
+	C_Container.SetInsertItemsLeftToRight(false)
 
 	if C.Bags.SortToBottom then
 		C_Container.SetSortBagsRightToLeft(false)
-		C_Container.SetInsertItemsLeftToRight(true)
 	else
 		C_Container.SetSortBagsRightToLeft(true)
-		C_Container.SetInsertItemsLeftToRight(false)
 	end
 
 	-- Create the AIO container on load
