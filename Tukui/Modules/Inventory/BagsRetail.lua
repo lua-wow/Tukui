@@ -1,6 +1,9 @@
 local T, C, L = unpack((select(2, ...)))
 
 --[[ THIS BAG MODULE IS CURRENTLY WORK IN PROGRESS]]
+local ContainerFrameCombinedBags = _G.ContainerFrameCombinedBags
+local C_Container = _G.C_Container
+local C_Item = _G.C_Item
 
 local Bags = CreateFrame("Frame")
 local Inventory = T["Inventory"]
@@ -31,10 +34,94 @@ function Bags:SkinButtons()
 	end
 end
 
+function Bags.QuestItem(Button)
+	local BagID = Button:GetBagID()
+	local QuestInfo = C_Container.GetContainerItemQuestInfo(BagID, Button:GetID())
+	local IsQuestItem = QuestInfo.isQuestItem
+	local QuestID = QuestInfo.questID
+	local IsActive = QuestInfo.isActive
+
+	-- items starting quests are not considered quest items by Blizzard, mark them anyway
+	if IsQuestItem or QuestID then
+		if not Button.Quest then
+			Button.Quest = CreateFrame("Frame", nil, Button)
+			Button.Quest:SetFrameLevel(Button:GetFrameLevel())
+			Button.Quest:SetSize(8, Button:GetHeight() - 2)
+			Button.Quest:SetPoint("TOPLEFT", 1, -1)
+
+			Button.Quest.Backdrop = Button.Quest:CreateTexture(nil, "ARTWORK")
+			Button.Quest.Backdrop:SetAllPoints()
+			Button.Quest.Backdrop:SetColorTexture(unpack(C.General.BackdropColor))
+
+			Button.Quest.BorderRight = Button.Quest:CreateTexture(nil, "ARTWORK")
+			Button.Quest.BorderRight:SetSize(1, 1)
+			Button.Quest.BorderRight:SetPoint("TOPRIGHT", Button.Quest, "TOPRIGHT", 1, 0)
+			Button.Quest.BorderRight:SetPoint("BOTTOMRIGHT", Button.Quest, "BOTTOMRIGHT", 1, 0)
+			Button.Quest.BorderRight:SetColorTexture(1, 1, 0)
+
+			Button.Quest.Texture = Button.Quest:CreateTexture(nil, "OVERLAY")
+			Button.Quest.Texture:SetTexture("Interface\\QuestFrame\\AutoQuest-Parts")
+			Button.Quest.Texture:SetTexCoord(0.13476563, 0.17187500, 0.01562500, 0.53125000)
+			Button.Quest.Texture:SetSize(8, 16)
+			Button.Quest.Texture:SetPoint("CENTER")
+		end
+
+		Button.Quest:Show()
+		Button.Backdrop:SetBorderColor(1, 1, 0)
+	else
+		if Button.Quest and Button.Quest:IsShown() then
+			Button.Quest:Hide()
+		end
+	end
+end
+
+local WEAPON = 2
+local ARMOR = 4
+local PROFESSION = 19
+function Bags.ItemLevel(Button)
+	local ID = Button:GetBagID()
+	local Info = C_Container.GetContainerItemInfo(ID, Button:GetID())
+	local ItemLink = Info and Info.hyperlink
+
+	if ItemLink then
+		local Level = C_Item.GetDetailedItemLevelInfo(ItemLink)
+		local _, _, Rarity, _, _, _, _, _, _, _, _, ClassID = C_Item.GetItemInfo(ItemLink)
+
+		-- Only weapons and armors have item levels (and profession tools but here the quality gems are shown instead)
+		if ClassID and (ClassID == WEAPON or ClassID == ARMOR --[[or ClassID == PROFESSION]]) and Level and Level > 1 then
+			if not Button.ItemLevel then
+				Button.ItemLevel = Button:CreateFontString(nil, "ARTWORK")
+				Button.ItemLevel:SetPoint("TOPRIGHT", 1, -1)
+				Button.ItemLevel:SetFont(C.Medias.Font, 12, "OUTLINE")
+				Button.ItemLevel:SetJustifyH("RIGHT")
+			end
+
+			Button.ItemLevel:SetText(Level)
+
+			if Rarity then
+				R, G, B = C_Item.GetItemQualityColor(Rarity)
+
+				Button.ItemLevel:SetTextColor(R, G, B)
+			else
+				Button.ItemLevel:SetTextColor(1, 1, 1)
+			end
+		else
+			if Button.ItemLevel then
+				Button.ItemLevel:SetText("")
+			end
+		end
+	else
+		if Button.ItemLevel then
+			Button.ItemLevel:SetText("")
+		end
+	end
+end
+
 function Bags:UpdateItems()
 	for i, Button in self:EnumerateValidItems() do
 		local ID = Button:GetBagID()
 		local Info = C_Container.GetContainerItemInfo(ID, Button:GetID())
+		local ItemLink = Info and Info.hyperlink
 		local Texture = Info and Info.iconFileID
 		local Count = Info and Info.stackCount
 		local Lock = Info and Info.isLocked
@@ -44,11 +131,7 @@ function Bags:UpdateItems()
 		local IsFiltered = Info and Info.isFiltered
 		local NoValue = Info and Info.hasNoValue
 		local ItemID = Info and Info.itemID
-		local IsBounch = Info and Info.isBound
-		local QuestInfo = C_Container.GetContainerItemQuestInfo(ID, Button:GetID())
-		local IsQuestItem = QuestInfo.isQuestItem
-		local QuestID = QuestInfo.questID
-		local IsActive = QuestInfo.isActive
+		local IsBound = Info and Info.isBound
 		local R, G, B
 		
 		if Button.Backdrop then
@@ -62,75 +145,13 @@ function Bags:UpdateItems()
 		end
 		
 		-- Quest Items
-		if C.Bags.IdentifyQuestItems and IsQuestItem then
-			if not Button.Quest then
-				Button.Quest = CreateFrame("Frame", nil, Button)
-				Button.Quest:SetFrameLevel(Button:GetFrameLevel())
-				Button.Quest:SetSize(8, Button:GetHeight() - 2)
-				Button.Quest:SetPoint("TOPLEFT", 1, -1)
-
-				Button.Quest.Backdrop = Button.Quest:CreateTexture(nil, "ARTWORK")
-				Button.Quest.Backdrop:SetAllPoints()
-				Button.Quest.Backdrop:SetColorTexture(unpack(C.General.BackdropColor))
-
-				Button.Quest.BorderRight = Button.Quest:CreateTexture(nil, "ARTWORK")
-				Button.Quest.BorderRight:SetSize(1, 1)
-				Button.Quest.BorderRight:SetPoint("TOPRIGHT", Button.Quest, "TOPRIGHT", 1, 0)
-				Button.Quest.BorderRight:SetPoint("BOTTOMRIGHT", Button.Quest, "BOTTOMRIGHT", 1, 0)
-				Button.Quest.BorderRight:SetColorTexture(1, 1, 0)
-
-				Button.Quest.Texture = Button.Quest:CreateTexture(nil, "OVERLAY")
-				Button.Quest.Texture:SetTexture("Interface\\QuestFrame\\AutoQuest-Parts")
-				Button.Quest.Texture:SetTexCoord(0.13476563, 0.17187500, 0.01562500, 0.53125000)
-				Button.Quest.Texture:SetSize(8, 16)
-				Button.Quest.Texture:SetPoint("CENTER")
-			end
-
-			Button.Quest:Show()
-			Button.Backdrop:SetBorderColor(1, 1, 0)
-		else
-			if Button.Quest and Button.Quest:IsShown() then
-				Button.Quest:Hide()
-			end
+		if C.Bags.IdentifyQuestItems then
+			Bags.QuestItem(Button)
 		end
 		
 		-- Items Level
 		if C.Bags.ItemLevel then
-			if ItemLink then
-				local Level = C_Item.GetDetailedItemLevelInfo(ItemLink)
-				local _, _, Rarity, _, _, ItemType, _, _, _, _, _, ClassID = C_Item.GetItemInfo(ItemLink)
-
-				if (ItemType and (ItemType == "Armor" or ItemType == "Weapon")) and Level and Level > 1 then
-					if not Button.ItemLevel then
-						Button.ItemLevel = Button:CreateFontString(nil, "ARTWORK")
-						Button.ItemLevel:SetPoint("TOPRIGHT", 1, -1)
-						Button.ItemLevel:SetFont(C.Medias.Font, 12, "OUTLINE")
-						Button.ItemLevel:SetJustifyH("RIGHT")
-					end
-
-					Button.ItemLevel:SetText(Level)
-
-					if Rarity then
-						R, G, B = C_Item.GetItemQualityColor(Rarity)
-
-						if Button.ItemLevel then
-							Button.ItemLevel:SetTextColor(R, G, B)
-						end
-					else
-						if Button.ItemLevel then
-							Button.ItemLevel:SetTextColor(1, 1, 1)
-						end
-					end
-				else
-					if Button.ItemLevel then
-						Button.ItemLevel:SetText("")
-					end
-				end
-			else
-				if Button.ItemLevel then
-					Button.ItemLevel:SetText("")
-				end
-			end
+			Bags.ItemLevel(Button)
 		end
 	end
 end
