@@ -1,0 +1,5 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+Tukui/Libs/oUF merge=ours
+Tukui/Libs/oUF_Retail merge=ours
