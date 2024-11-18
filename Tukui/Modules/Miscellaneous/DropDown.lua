@@ -4,16 +4,10 @@ local Miscellaneous = T["Miscellaneous"]
 local Noop = function() end
 local UIDropDownMenu_CreateFrames = UIDropDownMenu_CreateFrames
 local DropDown = CreateFrame("Frame")
-
-DropDown.ChatMenus = {
-	"ChatMenu",
-	"EmoteMenu",
-	"LanguageMenu",
-	"VoiceMacroMenu",
-}
+local DataTexts = T["DataTexts"]
 
 function DropDown:Skin()
-	if T.Retail then
+	if Menu then
 		local Dropdown = Menu.GetManager():GetOpenMenu()
 		
 		if Dropdown then
@@ -76,21 +70,12 @@ function DropDown:Skin()
 end
 
 function DropDown:Enable()
-	if T.Retail then
+	if Menu then
 		local Manager = Menu.GetManager()
-		
+
 		hooksecurefunc(Manager, "OpenMenu", self.Skin)
 		hooksecurefunc(Manager, "OpenContextMenu", self.Skin)
 	else
-		local Menu
-		
-		for i = 1, getn(self.ChatMenus) do
-			Menu = _G[self.ChatMenus[i]]
-			Menu:StripTextures()
-			Menu:CreateBackdrop()
-			Menu:CreateShadow()
-		end
-
 		hooksecurefunc("UIDropDownMenu_CreateFrames", self.Skin)
 
 		-- use dropdown lib

@@ -618,7 +618,7 @@ Toolkit.Functions.HideBlizzard = function(self)
 	if T.Retail then
 		--Display_UseUIScale:Hide()
 		--Display_UIScaleSlider:Hide()
-	else
+	elseif Advanced_UseUIScale and Advanced_UIScaleSlider then
 		Advanced_UseUIScale:Hide()
 		Advanced_UIScaleSlider:Hide()
 	end
@@ -628,6 +628,23 @@ Toolkit.Functions.RegisterDefaultSettings = function(self)
 	for Option, Parameter in pairs(self.DefaultSettings) do
 		if not self.Settings[Option] then
 			self.Settings[Option] = Parameter
+		end
+	end
+end
+
+do	-- backwards compatibility for GetSpellInfo based on ElvUI's function
+	local GetSpellInfo = GetSpellInfo
+	local C_Spell_GetSpellInfo = C_Spell.GetSpellInfo
+	Toolkit.Functions.GetSpellInfo = function(spell)
+		if not spell then return end
+
+		if GetSpellInfo then
+			return GetSpellInfo(spell)
+		else
+			local info = C_Spell_GetSpellInfo(spell)
+			if info then
+				return info.name, info.rank, info.iconID, info.castTime, info.minRange, info.maxRange, info.spellID, info.originalIconID
+			end
 		end
 	end
 end

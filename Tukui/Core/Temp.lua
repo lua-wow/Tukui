@@ -8,6 +8,11 @@ local Temp = CreateFrame("Frame", nil, UIParent)
 
 -- TEMP for bugs fixes
 function Temp:Enable()
+	if T.Retail then
+		-- Fix for right-cancel clicks not working on buff frame
+		SetCVar("ActionButtonUseKeyDown", 0)
+	end
+	
 	if T.WotLK then
 		local Battleground = CreateFrame("Frame", nil, UIParent)
 		Battleground:SetFrameStrata("HIGH")
@@ -70,7 +75,3 @@ end
 
 Temp:RegisterEvent("PLAYER_LOGIN")
 Temp:SetScript("OnEvent", Temp.Enable)
-
-
---hooksecurefunc("SetCVar", function(a, b, c) print(a,b,c) end)
-

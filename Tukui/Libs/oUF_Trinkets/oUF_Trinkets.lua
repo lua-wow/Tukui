@@ -2,6 +2,8 @@ local _, ns = ...
 local oUF = ns.oUF or oUF
 assert(oUF, 'oUF not loaded')
 
+local GetSpellInfo = C_Spell.GetSpellInfo or GetSpellInfo
+
 local Update = function(self, event, ...)
 	local _, instanceType = IsInInstance()
 
