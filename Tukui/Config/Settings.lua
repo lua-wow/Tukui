@@ -407,6 +407,7 @@ C["UnitFrames"] = {
 	["HealCommSelfColor"] = {0.29, 1, 0.30},
 	["HealCommOtherColor"] = {1, .72, 0.30},
 	["HealCommAbsorbColor"] = {207/255, 181/255, 59/255},
+	["HealCommHealAbsorbColor"] = {.8, .5, .15},
 	["RaidIconSize"] = 24,
 	["Boss"] = true,
 	["Arena"] = true,

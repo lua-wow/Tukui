@@ -95,6 +95,8 @@ local function rebuildIndex(self, changedWidget)
 		manager[manager._Count] = nil
 		manager._Count = manager._Count - 1
 	end
+
+	return changedWidget
 end
 
 
@@ -146,8 +148,7 @@ function WidgetManager:remove(nameOrIndex)
 		manager[widget.index] = nil
 		manager[widget.name] = nil
 
-		rebuildIndex(self, widget)
-		return widget
+		return rebuildIndex(self, widget)
 	end
 end
 
@@ -159,12 +160,11 @@ function WidgetManager:insert(atIndex, name, func, config)
 	local manager = Widgets[self]
 
 	-- fails if name is not a string, a widget of that name already exists, or the index is outside the current range
-	if type(name) == "string" and not manager[name] and 0 <= atIndex and atIndex <= manager._Count + 1 then
+	if type(name) == "string" and not manager[name] and 1 <= atIndex and atIndex <= manager._Count + 1 then
 		local widget = Widget(atIndex, name, func, config)
 		manager[name] = widget
 
-		rebuildIndex(self, widget)
-		return widget
+		return rebuildIndex(self, widget)
 	end
 end
 
@@ -174,9 +174,9 @@ function WidgetManager:createWidgets(unitFrame)
 
 	-- Execute only once as changes are stored in the manager
 	if not manager._Initialized then
-		manager._AddDefaultWidgets(self)
+		manager._AddDefaultWidgets(self, unitFrame)
 		if self._UpdateWidgetList then
-			self._UpdateWidgetList(self)
+			self._UpdateWidgetList(self, unitFrame)
 		end
 		manager._Initialized = true
 	end
