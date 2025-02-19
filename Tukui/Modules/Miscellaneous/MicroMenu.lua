@@ -82,7 +82,7 @@ function MicroMenu:Minimalist()
 		[3] = "T&S", 
 		[4] = T.Retail and "A" or T.Cata and "A" or "Q", 
 		[5] = T.Retail and "QL" or T.Cata and "QL" or T.Classic and "GC" or "S", 
-		[6] = T.Retail and "G&C" or T.Cata and "GC" or "G", 
+		[6] = T.Retail and "G&C" or T.Cata and "S" or "G", 
 		[7] = T.Retail and "G" or T.Cata and "GC" or "MM", 
 		[8] = T.Retail and "A" or T.Cata and "DJ" or "HR", 
 		[9] = T.Retail and "WC" or T.Cata and "C" or "C", 
