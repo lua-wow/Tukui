@@ -8,7 +8,7 @@ on:
 jobs:
   release:
     name: Publish release to CDN
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
       DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
     steps:
