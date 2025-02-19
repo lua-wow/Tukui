@@ -74,20 +74,22 @@ function MicroMenu:Minimalist()
 		[10] = {171/255, 9/255, 182/255},
 		[11] = {203/255, 236/255, 79/255},
 		[12] = {214/255, 040/255, 79/255},
+		[13] = {214/255, 040/255, 79/255},
 	}
 	local Texts = {
-		[1] = "CI", -- Character
-		[2] = T.Retail and "P" or "SA", -- Spellbook & Abilities
-		[3] = "T&S", -- Spec & Talents
-		[4] = T.Retail and "A" or T.Cata and "A" or "Q", -- Achievements / QuestLog (nonretail)
-		[5] = T.Retail and "QL" or T.Cata and "QL" or T.Classic and "GC" or "S", -- Questlog / Social (nonretail)
-		[6] = T.Retail and "G&C" or T.Cata and "GC" or "G", -- Guild & Communities / Group Finder (nonretail)
-		[7] = T.Retail and "G" or T.Cata and "C" or "MM", -- Group Finder / Game Menu (nonretail)
-		[8] = T.Retail and "A" or T.Cata and "P" or "HR", -- Adventure Guide / Help (nonretail)
-		[9] = T.Retail and "WC" or T.Cata and "GF" or "C", -- Collections
-		[10] = T.Cata and "DJ" or "M", -- Game Menu
-		[11] = T.Cata and "GM" or "S", -- Shop
-		[12] = "CS", -- Customer Support
+		[1] = "CI", 
+		[2] = T.Retail and "P" or "SA", 
+		[3] = "T&S", 
+		[4] = T.Retail and "A" or T.Cata and "A" or "Q", 
+		[5] = T.Retail and "QL" or T.Cata and "QL" or T.Classic and "GC" or "S", 
+		[6] = T.Retail and "G&C" or T.Cata and "GC" or "G", 
+		[7] = T.Retail and "G" or T.Cata and "GC" or "MM", 
+		[8] = T.Retail and "A" or T.Cata and "DJ" or "HR", 
+		[9] = T.Retail and "WC" or T.Cata and "C" or "C", 
+		[10] = T.Cata and "PvP" or "M", 
+		[11] = T.Cata and "GF" or "S", 
+		[12] = T.Cata and "GM" and "CS",
+		[13] = T.Cata and "CS" and "", 
 	}
 
 	MicroMenu:SetFrameStrata("BACKGROUND")
