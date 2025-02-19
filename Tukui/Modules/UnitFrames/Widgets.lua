@@ -494,6 +494,7 @@ do
 	Widgets.HighlightIndicator = function(unitFrame, config)
 		setmetatable(config, { __index = defaults(unitFrame) })
 		local Highlight = CreateFrame("Frame", nil, unitFrame, "BackdropTemplate")
+		local Event = T.Retail and "GROUP_ROSTER_UPDATE" or "RAID_ROSTER_UPDATE"
 
 		Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = config.size})
 		Highlight:SetOutside(unitFrame, config.size, config.size)
@@ -504,7 +505,7 @@ do
 		unitFrame.Highlight = Highlight
 
 		unitFrame:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
-		unitFrame:RegisterEvent("RAID_ROSTER_UPDATE", UnitFrames.Highlight, true)
+		unitFrame:RegisterEvent(Event, UnitFrames.Highlight, true)
 	end
 end
 
