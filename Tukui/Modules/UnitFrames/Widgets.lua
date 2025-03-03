@@ -467,10 +467,12 @@ do
 	end
 
 	Widgets.Name = function(unitFrame, config)
+		local NameFont = T.GetFont(config.font)
+		
 		setmetatable(config, { __index = defaults(unitFrame) })
 		local Name = config.parent:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint(config.anchor[1], config.parent, config.anchor[2], config.anchor[3], config.anchor[4])
-		Name:SetFontObject(config.font)
+		Name:SetFontObject(NameFont)
 
 		unitFrame.Name = Name
 
