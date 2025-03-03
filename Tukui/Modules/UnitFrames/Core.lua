@@ -780,7 +780,7 @@ function UnitFrames:GetRaidFramesAttributes()
 		"showParty", true,
 		"showRaid", true,
 		"showPlayer", true,
-		"showSolo", true,
+		"showSolo", false,
 		"xoffset", C.Raid.Padding,
 		"yOffset", -C.Raid.Padding,
 		"point", "TOP",
