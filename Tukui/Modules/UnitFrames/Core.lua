@@ -441,24 +441,25 @@ function UnitFrames:PostCreateAura(button, unit)
 	end
 end
 
-function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff, duration, timeLeft)
-	local data
+-- function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff, duration, timeLeft)
+function UnitFrames:PostUpdateAura(button, unit, data, position)
+	-- local data
 
-	-- Because on oUF Retail args are different, adjust them
-	if T.Retail then
-		local arg1, arg2, arg3, arg4 = unit, button, index, offset
+	-- -- Because on oUF Retail args are different, adjust them
+	-- if T.Retail then
+	-- 	local arg1, arg2, arg3, arg4 = unit, button, index, offset
 
-		button = arg1
-		unit = arg2
-		data = arg3
-		index = arg4
+	-- 	button = arg1
+	-- 	unit = arg2
+	-- 	data = arg3
+	-- 	index = arg4
 
-		button.filter = (data.isHelpful and "HELPFUL") or (data.isHarmful and "HARMFUL")
-		button.icon = button.Icon
-		button.isPlayer = data.isPlayerAura
-	end
+	-- 	button.filter = (data.isHelpful and "HELPFUL") or (data.isHarmful and "HARMFUL")
+	-- 	button.icon = button.Icon
+	-- 	button.isPlayer = data.isPlayerAura
+	-- end
 
-	local _, _, _, DType, Duration, ExpirationTime, _, IsStealable = UnitAura(unit, index, button.filter)
+	-- local _, _, _, DType, Duration, ExpirationTime, _, IsStealable = UnitAura(unit, index, button.filter)
 
 	if button then
 		if(button.filter == "HARMFUL") then
@@ -466,13 +467,13 @@ function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff
 				button.icon:SetDesaturated(true)
 				button.Backdrop:SetBorderColor(unpack(C["General"].BorderColor))
 			else
-				local color = DebuffTypeColor[DType] or DebuffTypeColor.none
+				local color = DebuffTypeColor[data.dispelName] or DebuffTypeColor.none
 				button.icon:SetDesaturated(false)
 				button.Backdrop:SetBorderColor(color.r * 0.8, color.g * 0.8, color.b * 0.8)
 			end
 		else
 			if button.Animation then
-				if (IsStealable or DType == "Magic") and UnitIsEnemy("player", unit) then
+				if (data.isStealable or data.dispelName == "Magic") and UnitIsEnemy("player", unit) then
 					if not button.Animation:IsPlaying() then
 						button.Animation:Play()
 
@@ -491,7 +492,7 @@ function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff
 		if button.Remaining then
 			local Size = button:GetSize()
 
-			if (Duration and Duration > 0 and Size > 20) then
+			if (data.duration and data.duration > 0 and Size > 20) then
 				button.Remaining:Show()
 
 				button:SetScript("OnUpdate", UnitFrames.SetAuraTimer)
@@ -511,8 +512,8 @@ function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff
 			end
 		end
 
-		button.Duration = Duration
-		button.TimeLeft = ExpirationTime
+		button.Duration = data.duration or 0
+		button.TimeLeft = data.expirationTime
 		button.Elapsed = GetTime()
 	end
 end

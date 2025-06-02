@@ -125,7 +125,9 @@ function ActionBars:CreateBar1()
 		end
 	]])
 
-	RegisterStateDriver(ActionBar1, "page", ActionBar1.GetBar())
+	local pageState = ActionBar1.GetBar()
+	print("PAGE STATE", pageState)
+	RegisterStateDriver(ActionBar1, "page", pageState)
 
 	if T.Retail or T.Cata then
 		ActionBar1:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
