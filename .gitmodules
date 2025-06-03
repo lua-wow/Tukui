@@ -1,0 +1,20 @@
+[submodule "Tukui/Libs/TaintLess"]
+	path = Tukui/Libs/TaintLess
+	url = https://github.com/lua-wow/TaintLess.git
+	branch = master
+[submodule "Tukui/Libs/CallbackHandler-1.0"]
+	path = Tukui/Libs/CallbackHandler-1.0
+	url = git@github.com:lua-wow/CallbackHandler-1.0.git
+	branch = master
+[submodule "Tukui/Libs/LibStub"]
+	path = Tukui/Libs/LibStub
+	url = git@github.com:lua-wow/LibStub.git
+	branch = master
+[submodule "Tukui/Libs/SortBags"]
+	path = Tukui/Libs/SortBags
+	url = https://github.com/shirsig/SortBags.git
+	branch = master
+[submodule "Tukui/Libs/SortBags_Vanilla"]
+	path = Tukui/Libs/SortBags_Vanilla
+	url = https://github.com/shirsig/SortBags.git
+	branch = classic-era
