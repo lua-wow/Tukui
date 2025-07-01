@@ -75,21 +75,23 @@ function MicroMenu:Minimalist()
 		[11] = {203/255, 236/255, 79/255},
 		[12] = {214/255, 040/255, 79/255},
 		[13] = {214/255, 040/255, 79/255},
+		[14] = {214/255, 040/255, 79/255},
 	}
 	local Texts = {
 		[1] = "CI", 
 		[2] = T.Retail and "P" or "SA", 
 		[3] = "T&S", 
-		[4] = T.Retail and "A" or T.Cata and "A" or "Q", 
-		[5] = T.Retail and "QL" or T.Cata and "QL" or T.Classic and "GC" or "S", 
-		[6] = T.Retail and "G&C" or T.Cata and "S" or "G", 
-		[7] = T.Retail and "G" or T.Cata and "GC" or "MM", 
-		[8] = T.Retail and "A" or T.Cata and "DJ" or "HR", 
-		[9] = T.Retail and "WC" or T.Cata and "C" or "C", 
-		[10] = T.Cata and "PvP" or "M", 
-		[11] = T.Cata and "GF" or "S", 
-		[12] = T.Cata and "GM" and "CS",
-		[13] = T.Cata and "CS" and "", 
+		[4] = T.Retail and "A" or T.MoP and "A" or "Q", 
+		[5] = T.Retail and "QL" or T.MoP and "QL" or T.Classic and "GC" or "S", 
+		[6] = T.Retail and "G&C" or T.MoP and "S" or "G", 
+		[7] = T.Retail and "G" or T.MoP and "GC" or "MM", 
+		[8] = T.Retail and "A" or T.MoP and "DJ" or "HR", 
+		[9] = T.Retail and "WC" or T.MoP and "C" or "C", 
+		[10] = T.MoP and "PvP" or "M", 
+		[11] = T.MoP and "GF" or "S", 
+		[12] = T.MoP and "GM" and "CS",
+		[13] = T.MoP and "CS" and "", 
+		[14] = T.MoP and "CS" and "", 
 	}
 
 	MicroMenu:SetFrameStrata("BACKGROUND")
@@ -153,7 +155,7 @@ function MicroMenu:GameMenu()
 
 	MicroMenu:SetFrameStrata("HIGH")
 	MicroMenu:SetFrameLevel(600)
-	MicroMenu:SetSize(250, T.Classic and 298 or T.Cata and 438 or 408)
+	MicroMenu:SetSize(250, T.Classic and 298 or T.MoP and 438 or 408)
 	MicroMenu:CreateBackdrop("Transparent")
 	MicroMenu:CreateShadow()
 	MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)

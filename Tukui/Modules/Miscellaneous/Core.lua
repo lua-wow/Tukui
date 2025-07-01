@@ -13,13 +13,17 @@ function Miscellaneous:Enable()
 	Miscellaneous["Durability"]:Enable()
 	Miscellaneous["UIWidgets"]:Enable()
 	Miscellaneous["AFK"]:Enable()
-	Miscellaneous["MicroMenu"]:Enable()
+	
+	if Miscellaneous.MicroMenu then
+		Miscellaneous["MicroMenu"]:Enable()
+	end
+	
 	Miscellaneous["Keybinds"]:Enable()
 	Miscellaneous["ThreatBar"]:Enable()
 	Miscellaneous["ItemLevel"]:Enable()
 	Miscellaneous["Alerts"]:Enable()
 	
-	if T.Retail or T.Cata then
+	if T.Retail or T.MoP then
 		Miscellaneous["VehicleIndicator"]:Enable()
 	end
 

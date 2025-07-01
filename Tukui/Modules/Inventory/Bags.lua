@@ -603,6 +603,12 @@ function Bags:CreateContainer(storagetype, ...)
 		SwitchReagentButton.Text:SetJustifyH("LEFT")
 		SwitchReagentButton.Text:SetPoint("CENTER")
 		SwitchReagentButton.Text:SetText("Switch to: "..REAGENT_BANK)
+		
+		if T.MoP then
+			SwitchReagentButton:SetParent(T.Hider)
+			
+			SortButton:SetWidth(Container:GetWidth())
+		end
 
 		Purchase:ClearAllPoints()
 		Purchase:SetWidth(Container:GetWidth() + 50)
@@ -652,12 +658,20 @@ function Bags:CreateContainer(storagetype, ...)
 		BankBagsContainer:Hide()
 
 		BankFrame:EnableMouse(false)
+		
+		if T.MoP then
+			BankFrameCloseButton:SetParent(T.Hider)
+			BankItemSearchBox:SetParent(T.Hider)
+			BankFrame.TitleContainer:SetParent(T.Hider)
+			BankFrameMoneyFrameInset:SetParent(T.Hider)
+			BankFrameMoneyFrameBorder:SetParent(T.Hider)
+		end
 
 		Container.BagsContainer = BankBagsContainer
 		Container.SortButton = SortButton
 		Container.ReagentButton = SwitchReagentButton
 
-		if not T.Retail then
+		if (not T.Retail) and (not T.MoP) then
 			SwitchReagentButton:Hide()
 
 			SortButton:SetWidth(Container:GetWidth())
@@ -1421,7 +1435,7 @@ function Bags:Enable()
 	if SetSortBagsRightToLeft and SetInsertItemsLeftToRight then
 		if C.Bags.SortToBottom then
 			SetSortBagsRightToLeft(false)
-			SetInsertItemsLeftToRight(T.Cata and false or true)
+			SetInsertItemsLeftToRight(T.MoP and false or true)
 		else
 			SetSortBagsRightToLeft(true)
 			SetInsertItemsLeftToRight(false)

@@ -1,5 +1,7 @@
 local T, C, L = unpack((select(2, ...)))
 
+if T.MoP then return end
+
 if T.Retail then
 	local ObjectiveTracker = CreateFrame("Frame", nil, UIParent)
 	local Misc = T["Miscellaneous"]
@@ -558,7 +560,7 @@ else
 		HeaderText:SetText(CURRENT_QUESTS)
 
 		-- Change font of watched quests
-		if not T.Cata then
+		if not T.MoP then
 			for i = 1, 30 do
 				local Line = _G["QuestWatchLine"..i]
 				
@@ -685,7 +687,7 @@ else
 	end
 
 	function ObjectiveTracker:AddHooks()
-		if not T.Cata then
+		if not T.MoP then
 			hooksecurefunc("QuestWatch_Update", self.AddQuestClick)
 		end
 	end
@@ -703,7 +705,7 @@ else
 		self:AddHooks()
 		
 		-- Maybe it will taint, lets me know
-		if T.Cata then 
+		if T.MoP then 
 			WatchFrame.ClearAllPoints = function() return end
 		end
 

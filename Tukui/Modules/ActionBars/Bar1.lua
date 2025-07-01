@@ -33,7 +33,7 @@ function ActionBars:CreateBar1()
 	end
 
 	if (C.ActionBars.SwitchBarOnStance) then
-		if T.Cata then
+		if T.MoP then
 			Rogue = "[bonusbar:1] 7; [bonusbar:2] 8;"
 		else
 			Rogue = "[bonusbar:1] 7;"
@@ -47,13 +47,13 @@ function ActionBars:CreateBar1()
 
 		Warrior = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;"
 		Priest = "[bonusbar:1] 7;"
-		if T.Cata then
+		if T.MoP then
 			Warlock = "[form:1] 7;"
 		end
 	end
 
 	local DefaultPaging
-	if T.Retail or T.Cata then
+	if T.Retail or T.MoP then
 		local VehicleBar = format("[vehicleui][possessbar] %d;", GetVehicleBarIndex()) or ""
 		local OverrideBar = format("[overridebar] %d;", GetOverrideBarIndex()) or ""
 		local ShapeshiftBar = format("[shapeshift] %d;", GetTempShapeshiftBarIndex()) or ""
@@ -127,7 +127,7 @@ function ActionBars:CreateBar1()
 
 	RegisterStateDriver(ActionBar1, "page", ActionBar1.GetBar())
 
-	if T.Retail or T.Cata then
+	if T.Retail or T.MoP then
 		ActionBar1:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
 		ActionBar1:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
 	end

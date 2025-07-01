@@ -7,7 +7,9 @@ local Miscellaneous = T.Miscellaneous
 local OnMouseDown = function()
 	local MicroMenu = Miscellaneous.MicroMenu
 
-	MicroMenu:Toggle()
+	if MicroMenu then
+		MicroMenu:Toggle()
+	end
 end
 
 local Enable = function(self)

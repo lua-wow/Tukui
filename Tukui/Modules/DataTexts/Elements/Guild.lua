@@ -45,7 +45,7 @@ local OnMouseDown = function(self, button)
 			return
 		end
 
-		if T.Retail or T.Cata then
+		if T.Retail or T.MoP then
 			ToggleGuildFrame()
 		else
 			ToggleFriendsFrame(3)

@@ -1,4 +1,4 @@
-## Interface: 40402
+## Interface: 50500
 ## Author: Tukz
 ## X-Maintainer: Tukz
 ## Version: @project-version@
@@ -65,6 +65,7 @@ Libs\oUF_FloatingCombatFeedback\oUF_FloatingCombatFeedback.lua
 Libs\oUF_AuraBars\oUF_AuraBars.lua
 Libs\oUF_AuraTrack\oUF_AuraTrack.lua
 Libs\oUF_DruidMana\oUF_DruidMana.lua
+Libs\oUF_HarmonyBar\oUF_HarmonyBar.lua
 Libs\oUF_HolyPowerBar\oUF_HolyPowerBar.lua
 Libs\oUF_SoulShards\oUF_SoulShards.lua
 Libs\oUF_Trinkets\oUF_Trinkets.lua
@@ -159,7 +160,7 @@ Modules\Miscellaneous\Grid.lua
 Modules\Miscellaneous\GuildNamesByClassColor.lua
 Modules\Miscellaneous\ItemLevel.lua
 Modules\Miscellaneous\Keybinds.lua
-Modules\Miscellaneous\MicroMenu.lua
+## Modules\Miscellaneous\MicroMenu.lua
 Modules\Miscellaneous\MirrorTimers.lua
 Modules\Miscellaneous\ObjectiveTracker.lua
 Modules\Miscellaneous\RaidUtilities.lua
@@ -196,6 +197,7 @@ Modules\UnitFrames\Classes\Mage.lua
 Modules\UnitFrames\Classes\Warlock.lua
 Modules\UnitFrames\Classes\Druid.lua
 Modules\UnitFrames\Classes\DeathKnight.lua
+Modules\UnitFrames\Classes\Monk.lua
 Modules\UnitFrames\Units\Player.lua
 Modules\UnitFrames\Units\Target.lua
 Modules\UnitFrames\Units\TargetOfTarget.lua

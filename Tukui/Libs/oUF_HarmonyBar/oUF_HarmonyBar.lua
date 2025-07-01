@@ -32,6 +32,11 @@ local function UpdateMaxChi(self, chi, maxchi)
 	else
 		Bar[6]:Hide()
 	end
+	
+	-- for MoP Classic
+	if Max == 4 then
+		Bar[5]:SetAlpha(.3)
+	end
 end
 
 local function Update(self, event, unit, powerType)
@@ -45,7 +50,7 @@ local function Update(self, event, unit, powerType)
 
 	local Current = UnitPower("player", Enum.PowerType.Chi)
 	local Max = UnitPowerMax("player", Enum.PowerType.Chi)
-	local Spec = GetSpecialization()
+	local Spec = GetSpecialization and GetSpecialization() or GetPrimaryTalentTree()
 
 	-- Determine if we need it show or not
 	if Spec == 3 then

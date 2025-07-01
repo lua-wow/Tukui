@@ -24,7 +24,7 @@ function ActionBars:CreateStanceBar()
 	local Bar = CreateFrame("Frame", "TukuiStanceBar", T.PetHider, "SecureHandlerStateTemplate")
 	Bar:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
 	-- Hunter in Cata has both stance and pet.  Offset stance so not on top of each other
-	if T.Cata and (T.MyClass == "HUNTER" or T.MyClass == "DEATHKNIGHT") then
+	if T.MoP and (T.MyClass == "HUNTER" or T.MyClass == "DEATHKNIGHT") then
 		Bar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 277)
 	else
 		Bar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 233)
