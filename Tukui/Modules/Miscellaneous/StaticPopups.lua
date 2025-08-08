@@ -13,9 +13,9 @@ StaticPopups.Popups = {
 function StaticPopups:Skin()
 	local Name = self:GetName()
 
-	if T.Retail then
-		_G[Name].Border:SetAlpha(0)
-	end
+	-- if T.Retail then
+	-- 	_G[Name].Border:SetAlpha(0)
+	-- end
 
 	_G[Name]:StripTextures()
 	_G[Name]:CreateBackdrop("Transparent")
@@ -40,14 +40,16 @@ function StaticPopups:Skin()
 	_G[Name.."MoneyInputFrameCopper"].Backdrop:SetBackdropBorderColor(0, 0, 0, 0)
 	_G[Name.."EditBox"].Backdrop:SetPoint("TOPLEFT", -2, -4)
 	_G[Name.."EditBox"].Backdrop:SetPoint("BOTTOMRIGHT", 2, 4)
-	_G[Name.."ItemFrameNameFrame"]:Kill()
-	_G[Name.."ItemFrame"]:GetNormalTexture():Kill()
-	_G[Name.."ItemFrame"]:CreateBackdrop("Default")
-	_G[Name.."ItemFrame"]:StyleButton()
-	_G[Name.."ItemFrameIconTexture"]:SetTexCoord(.08, .92, .08, .92)
-	_G[Name.."ItemFrameIconTexture"]:ClearAllPoints()
-	_G[Name.."ItemFrameIconTexture"]:SetPoint("TOPLEFT", 2, -2)
-	_G[Name.."ItemFrameIconTexture"]:SetPoint("BOTTOMRIGHT", -2, 2)
+	if not T.Retail then -- these dont work in retail anymore, don't know if needed for other versions
+		_G[Name.."ItemFrameNameFrame"]:Kill()
+		_G[Name.."ItemFrame"]:GetNormalTexture():Kill()
+		_G[Name.."ItemFrame"]:CreateBackdrop("Default")
+		_G[Name.."ItemFrame"]:StyleButton()
+		_G[Name.."ItemFrameIconTexture"]:SetTexCoord(.08, .92, .08, .92)
+		_G[Name.."ItemFrameIconTexture"]:ClearAllPoints()
+		_G[Name.."ItemFrameIconTexture"]:SetPoint("TOPLEFT", 2, -2)
+		_G[Name.."ItemFrameIconTexture"]:SetPoint("BOTTOMRIGHT", -2, 2)
+	end
 	_G[Name.."CloseButton"]:SkinCloseButton()
 	_G[Name.."CloseButton"].SetNormalTexture = function() end
 	_G[Name.."CloseButton"].SetPushedTexture = function() end

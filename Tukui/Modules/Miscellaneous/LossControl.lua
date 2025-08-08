@@ -28,7 +28,7 @@ function LossControl:Update()
 end
 
 function LossControl:AddHooks()
-	hooksecurefunc("LossOfControlFrame_SetUpDisplay", self.Update)
+	hooksecurefunc(LossOfControlFrame, "SetUpDisplay", self.Update)
 end
 
 function LossControl:Enable()
