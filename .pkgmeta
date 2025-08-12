@@ -6,7 +6,7 @@ externals:
   Tukui/Libs/SortBags: https://github.com/shirsig/SortBags
   Tukui/Libs/SortBags_Vanilla:
     url: https://github.com/shirsig/SortBags
-    branch: classic-era
+    branch: classic-latest
   Tukui/Libs/TaintLess:
     url: https://www.townlong-yak.com/addons.git/taintless
     commit: default
