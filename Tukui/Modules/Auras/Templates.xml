@@ -1,9 +1,9 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Button name="AurasTemplate" inherits="SecureActionButtonTemplate" virtual="true">
+	<Button name="AurasTemplate" inherits="SecureActionButtonTemplate" virtual="true" registerForClicks="RightButtonUp, RightButtonDown">
 		<Size x="30" y="30"/>
 
 		<Attributes>
-			<Attribute name="type" value="cancelaura"/>
+			<Attribute name="type2" value="cancelaura"/>
 		</Attributes>
 
 		<Scripts>
@@ -12,8 +12,9 @@
 				local Auras = T["Auras"]
 
 				Auras.Skin(self)
-
-				self:RegisterForClicks("RightButtonUp")
+				
+				-- Don't call RegisterForClicks here - it's set in the XML template
+				-- This was causing taint when called during combat
 			</OnLoad>
 
 			<OnEnter>
