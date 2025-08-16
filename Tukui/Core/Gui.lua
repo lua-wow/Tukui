@@ -92,7 +92,7 @@ local CheckClient = function(self)
 
 	if Client == "RETAIL" and T.Retail then
 		return true
-	elseif Client == "CATA" and T.MoP then
+	elseif Client == "MISTS" and T.MoP then
 		return true
 	elseif Client == "CLASSIC" and T.Classic then
 		return true
@@ -1782,7 +1782,7 @@ GUI.Enable = function(self)
 	Move:SetScript("OnLeave", ButtonOnLeave)
 	Move:SetScript("OnMouseUp", function()
 		local Movers = T.Movers
-						
+
 		if not Movers.IsEnabled then
 			Movers:OpenEditMode()
 		else
