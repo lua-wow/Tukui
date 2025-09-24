@@ -34,7 +34,7 @@ do
 	local buttons = {}
 	function MicroMenu:ShownMicroButtons()
 		wipe(buttons)
-		
+
 		local Buttons = MICRO_BUTTONS
 
 		for _, name in next, Buttons do
@@ -78,20 +78,20 @@ function MicroMenu:Minimalist()
 		[14] = {214/255, 040/255, 79/255},
 	}
 	local Texts = {
-		[1] = "CI", 
-		[2] = T.Retail and "P" or "SA", 
-		[3] = "T&S", 
-		[4] = T.Retail and "A" or T.MoP and "A" or "Q", 
-		[5] = T.Retail and "QL" or T.MoP and "QL" or T.Classic and "GC" or "S", 
-		[6] = T.Retail and "G&C" or T.MoP and "S" or "G", 
-		[7] = T.Retail and "G" or T.MoP and "GC" or "MM", 
-		[8] = T.Retail and "A" or T.MoP and "DJ" or "HR", 
-		[9] = T.Retail and "WC" or T.MoP and "C" or "C", 
-		[10] = T.MoP and "PvP" or "M", 
-		[11] = T.MoP and "GF" or "S", 
+		[1] = "CI",
+		[2] = T.Retail and "P" or "SA",
+		[3] = "T&S",
+		[4] = T.Retail and "A" or T.MoP and "A" or "Q",
+		[5] = T.Retail and "QL" or T.MoP and "QL" or T.Classic and "GC" or "S",
+		[6] = T.Retail and "G&C" or T.MoP and "S" or "G",
+		[7] = T.Retail and "G" or T.MoP and "GC" or "MM",
+		[8] = T.Retail and "A" or T.MoP and "DJ" or "HR",
+		[9] = T.Retail and "WC" or T.MoP and "C" or "C",
+		[10] = T.MoP and "PvP" or "M",
+		[11] = T.MoP and "GF" or "S",
 		[12] = T.MoP and "GM" and "CS",
-		[13] = T.MoP and "CS" and "", 
-		[14] = T.MoP and "CS" and "", 
+		[13] = T.MoP and "CS" and "",
+		[14] = T.MoP and "CS" and "",
 	}
 
 	MicroMenu:SetFrameStrata("BACKGROUND")
@@ -141,12 +141,16 @@ function MicroMenu:Minimalist()
 				Button:SetPoint("RIGHT", MicroMenu)
 			end
 		end
+
+		if not T.Retail then
+			Button.SetPoint = Noop
+		end
 	end
 end
 
 function MicroMenu:GameMenu()
 	local Buttons = MicroMenu:ShownMicroButtons()
-	
+
 	if T.Classic then
 		WorldMapMicroButton:SetParent(T.Hider)
 		WorldMapMicroButton:ClearAllPoints()
@@ -160,7 +164,7 @@ function MicroMenu:GameMenu()
 	MicroMenu:CreateShadow()
 	MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	MicroMenu:Hide()
-	
+
 	MicroMenu.Backdrop:SetFrameLevel(0)
 
 	MainMenuBarBackpackButton:SetParent(T.Hider)
@@ -172,7 +176,7 @@ function MicroMenu:GameMenu()
 	for i = 1, #Buttons do
 		local Button = _G[Buttons[i]]
 		local PreviousButton = _G[Buttons[i - 1]]
-		
+
 		Button:StripTextures()
 		Button:SetAlpha(0)
 		Button:ClearAllPoints()
@@ -237,6 +241,10 @@ function MicroMenu:Blizzard()
 		else
 			Button:SetPoint("LEFT", PreviousButton, "RIGHT", T.Retail and 0 or -3, 0)
 		end
+
+		if not T.Retail then
+			Button.SetPoint = Noop
+		end
 	end
 end
 
@@ -261,27 +269,22 @@ function MicroMenu:Toggle()
 		self:ClearAllPoints()
 		self:SetPoint(A1, A2, A3, A4, A5)
 	end
-	
+
 	if T.Classic and WorldMapMicroButton then
 		WorldMapMicroButton:Hide()
 	end
 end
 
 function MicroMenu:Enable()
-	if not C.Misc.MicroStyle.Value == "None" then
+	if C.Misc.MicroStyle.Value == "None" then
 		return
-	end
-
-	if C.Misc.MicroStyle.Value == "Blizzard" then
+	elseif C.Misc.MicroStyle.Value == "Blizzard" then
 		self:Blizzard()
-		
-		MicroMenu:Toggle()
 	else
 		self:Minimalist()
-		
-		MicroMenu:Toggle()
 	end
 
+	MicroMenu:Toggle()
 	MicroMenu:AddHooks()
 
 	T.Movers:RegisterFrame(MicroMenu, "Micro Menu")
