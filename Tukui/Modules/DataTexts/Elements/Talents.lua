@@ -1,76 +1,62 @@
 local T, C, L = unpack((select(2, ...)))
 
 --[[ This datatext is from: SanUI, by Pyrates ]] --
+local GameTooltip = _G.GameTooltip
+local C_SpecializationInfo = _G.C_SpecializationInfo
 
 local DataText = T["DataTexts"]
 
-local CurrentLootSpecName
 local CurrentCharSpecName
+local CurrentLootSpecName
 
 local Update = function(self)
+	local CurrentSpec = C_SpecializationInfo.GetSpecialization()
 	local CurrentLootSpec = GetLootSpecialization()
-	local CurrentSpec = GetSpecialization()
 
+	CurrentCharSpecName = CurrentSpec and select(2, C_SpecializationInfo.GetSpecializationInfo(CurrentSpec))
 	CurrentLootSpecName = CurrentLootSpec and select(2, GetSpecializationInfoByID(CurrentLootSpec))
 
-	CurrentCharSpecName = CurrentSpec and select(2, GetSpecializationInfo(CurrentSpec))
-
-	if (CurrentLootSpec ~=0 and CurrentLootSpecName == nil) or CurrentCharSpecName == nil then
+	if CurrentCharSpecName then
+		self.Text:SetFormattedText("S %s - L %s", CurrentCharSpecName, CurrentLootSpecName or CurrentCharSpecName)
+	else
 		self.Text:SetText("+--+")
-
-		return
 	end
-
-	if CurrentLootSpec == 0 then
-		CurrentLootSpecName = CurrentCharSpecName
-	end
-
-	self.Text:SetText(CurrentCharSpecName)
 end
 
 local OnLeave = function()
 	GameTooltip:Hide()
 end
 
-
 local OnEnter = function(self)
-	self:Update()
-
 	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
 
-	GameTooltip:AddDoubleLine(LOOT..": ", CurrentLootSpecName, 1, 1, 1, 0, 1, 0)
 	GameTooltip:AddDoubleLine(SPECIALIZATION..": ", CurrentCharSpecName, 1, 1, 1, 0, 1, 0)
+	GameTooltip:AddDoubleLine(LOOT..": ", CurrentLootSpecName, 1, 1, 1, 0, 1, 0)
 
 	GameTooltip:Show()
 end
 
-local OnMouseDown = function()
+local OnMouseDown = function(self, button)
 	if InCombatLockdown() then
 		T.Print(ERR_NOT_IN_COMBAT)
 
 		return
 	end
 
-	if not PlayerTalentFrame then
-		LoadAddOn("Blizzard_TalentUI")
-	end
-
-	if not PlayerTalentFrame:IsShown() then
-		ShowUIPanel(PlayerTalentFrame)
+	if button == "LeftButton" then
+		-- Opens Specialization pane
+		PlayerSpellsUtil.TogglePlayerSpellsFrame(1)
 	else
-		HideUIPanel(PlayerTalentFrame)
+		-- Opens Talents pane
+		PlayerSpellsUtil.TogglePlayerSpellsFrame(2)
 	end
 end
 
 local Enable = function(self)
-	if T.Retail then
-		self:RegisterEvent("PLAYER_TALENT_UPDATE")
-	end
-
-	self:RegisterEvent("PLAYER_LOOT_SPEC_UPDATED")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
-	self:RegisterEvent("CONFIRM_TALENT_WIPE")
+	self:RegisterEvent("PLAYER_TALENT_UPDATE")
+	self:RegisterEvent("PLAYER_LOOT_SPEC_UPDATED")
 
 	self:SetScript("OnEvent", Update)
 	self:SetScript("OnEnter", OnEnter)
